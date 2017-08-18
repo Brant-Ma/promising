@@ -20,6 +20,26 @@ As it does not provides other useful features, and ES6 has already embrace the n
 
 Just have fun trying it out, or reading the source code for the detail.
 
+## Usage
+
+```javascript
+const { Promising } = require('../dist/promising')
+
+let p = new Promising((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Hi, you are promising!')
+  })
+})
+
+p.then((value) => {
+  console.log(value)
+}).catch((reason) => {
+  console.log(reason)
+})
+```
+
+
+
 ## License
 
 The MIT License (MIT)
