@@ -4,7 +4,6 @@
 
 > You are promising!
 
-
 ## Introduction
 
 <a href="http://promisesaplus.com/">
@@ -16,11 +15,26 @@ Promising is a simple and tiny implementation of [Promises/A+](http://promisesap
 
 ## Can I use it?
 
-As it does not provides other useful features, and ES6 has already embrace the native Promise object, **you should not use it**.
+*Promising* provides promise constructor and the instance method:
+
+- `Promising()`
+- `Promising.prototype.then()`
+- `Promising.prototype.catch()`
+
+*Promising* does not provide those static method:
+
+- `Promising.resolve()`
+- `Promising.reject()`
+- `Promising.all()`
+- `Promising.race()`
+
+As it does **not** provide other useful features, and ES6 has already embrace the native Promise object, **you should not use it**.
 
 Just have fun trying it out, or reading the source code for the detail.
 
 ## Usage
+
+Here is a simple example:
 
 ```javascript
 const { Promising } = require('../dist/promising')
@@ -38,7 +52,38 @@ p.then((value) => {
 })
 ```
 
+Another example (only in browser):
 
+```javascript
+let getURL = (url) => {
+  return new Promising((resolve, reject) => {
+    let req = new XMLHttpRequest()
+    req.open('GET', url, true)
+    // success handler
+    req.onload = () => {
+      let code = req.status
+      if ((code >= 200 && code < 300) || code == 304) {
+        resolve(req.responseText)
+      } else {
+        reject(req.statusText)
+      }
+    }
+    // error handler
+    req.onerror = () => {
+      reject(Error(req.statusText))
+    }
+    req.send()
+  })
+}
+
+let url = 'http://httpbin.org/get'
+
+getURL(url).then((res) => {
+  console.log(res)
+}).catch((err) => {
+  console.log(err)
+})
+```
 
 ## License
 
