@@ -15,13 +15,13 @@ Promising is a simple and tiny implementation of [Promises/A+](http://promisesap
 
 ## Can I use it?
 
-*Promising* provides promise constructor and the instance method:
+*Promising* provides promise constructor and these instance methods:
 
 - `Promising()`
 - `Promising.prototype.then()`
 - `Promising.prototype.catch()`
 
-*Promising* does not provide those static method:
+*Promising* does not provide these static methods:
 
 - `Promising.resolve()`
 - `Promising.reject()`
