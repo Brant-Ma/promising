@@ -33,7 +33,7 @@ As it does not provide other useful features, and ES6 has already embrace the na
 - Implementation: [src/promising.js](https://github.com/Brant-Ma/promising/blob/master/src/promising.js)
 - Testing helpers: [test/helper.js](https://github.com/Brant-Ma/promising/blob/master/test/helper.js)
 
-:blush: Just have fun trying it out, maybe you will find something interesting!
+:blush: Just have fun trying it out, maybe you will find something interesting! ([Releases](https://github.com/Brant-Ma/promising/releases))
 
 ## Usage
 
