@@ -15,44 +15,29 @@ Promising is a simple and tiny implementation of [Promises/A+](http://promisesap
 
 ## Can I use it?
 
-*Promising* provides promise constructor and these instance methods:
+*Promising* provides promise constructor and these instance/static methods:
 
 - `Promising()`
+- `Promising.resolve()`
+- `Promising.reject()`
 - `Promising.prototype.then()`
 - `Promising.prototype.catch()`
 
-*Promising* does not provide these static methods:
+*Promising* does **not** provide these static methods:
 
-- `Promising.resolve()`
-- `Promising.reject()`
 - `Promising.all()`
 - `Promising.race()`
 
-As it does **not** provide other useful features, and ES6 has already embrace the native Promise object, **you should not use it**.
+As it does not provide other useful features, and ES6 has already embrace the native Promise object, **you should not use it**. But you can read the source code for the detail:
 
-Just have fun trying it out, or reading the source code for the detail.
+- Implementation: [src/promising.js](https://github.com/Brant-Ma/promising/blob/master/src/promising.js)
+- Testing helpers: [test/helper.js](https://github.com/Brant-Ma/promising/blob/master/test/helper.js)
+
+:blush: Just have fun trying it out, maybe you will find something interesting!
 
 ## Usage
 
-Here is a simple example:
-
-```javascript
-const { Promising } = require('../dist/promising')
-
-let p = new Promising((resolve, reject) => {
-  setTimeout(() => {
-    resolve('Hi, you are promising!')
-  })
-})
-
-p.then((value) => {
-  console.log(value)
-}).catch((reason) => {
-  console.log(reason)
-})
-```
-
-Another example (only in browser):
+Here is a simple example (only in browser):
 
 ```javascript
 let getURL = (url) => {
@@ -82,6 +67,26 @@ getURL(url).then((res) => {
   console.log(res)
 }).catch((err) => {
   console.log(err)
+})
+```
+
+Another example about how to use the helper with Mocha and Chai:
+
+```javascript
+// test.js
+const { mayBeResolved, mayBeRejected } = require('./helper')
+
+describe('testing static methods: ', () => {
+  it('should be resolved', () => {
+    mayBeResolved(Promising.resolve(42)).then((value) => {
+      expect(value).to.equal(42)
+    })
+  })
+  it('should be rejected', () => {
+    mayBeRejected(Promising.reject('oops')).catch(reason => {
+      expect(reason).to.equal('oops')
+    })
+  })
 })
 ```
 

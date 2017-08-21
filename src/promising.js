@@ -45,6 +45,18 @@ class Promising {
     this[_transition](States.rejected, reason)
   }
 
+  static resolve(value) {
+    return new Promising((resolve, reject) => {
+      resolve(value)
+    })
+  }
+
+  static reject(reason) {
+    return new Promising((resolve, reject) => {
+      reject(reason)
+    })
+  }
+
   // 2.2 The then Method
   then(onFulfilled, onRejected) {
     const anotherPromise =  new Promising((resolve, reject) => {
